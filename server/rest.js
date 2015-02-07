@@ -56,10 +56,10 @@ function parse(key, old_file, new_file){
 
 module.exports = function(app){
 
-    //parse("user_id", "yelp_academic_dataset_user.json", "user.json");
-    //parse("user_id", "yelp_academic_dataset_tip.json", "tip.json");
-    //parse("business_id", "yelp_academic_dataset_business.json", "business.json");
-    //parse("business_id", "yelp_academic_dataset_checkin.json", "checkin.json");
-    parse("user_id", "yelp_academic_dataset_review_1.json", "review1.json");
+    parse("user_id", "yelp_academic_dataset_user.json", "user.json");
+    parse("user_id", "yelp_academic_dataset_tip.json", "tip.json");
+    parse("business_id", "yelp_academic_dataset_business.json", "business.json");
+    parse("business_id", "yelp_academic_dataset_checkin.json", "checkin.json");
+    //parse("user_id", "yelp_academic_dataset_review_1.json", "review1.json");
     //parse("user_id", "yelp_academic_dataset_review_2.json", "review2.json");
 }
