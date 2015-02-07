@@ -4,6 +4,11 @@
 
 // loaded all we need
 var _ = require('underscore');
+var fs = require("fs");
+var LineByLineReader = require('line-by-line');
+var readline = require('readline');
+var stream = require('stream');
+
 
 
 
@@ -32,19 +37,25 @@ var yelp = require("yelp").createClient({
 //   console.log(data);
 // });
 
-var fs = require("fs");
 
 
 function parse(key, old_file, new_file){
-    var file = fs.readFile("db/" + old_file, "utf8", function(err, file){
-       var arr = JSON.parse('[' + file.replace(/\n/g, ",").slice(0,-1) + ']');
-        var res = {};
-        arr.forEach(function(obj){
-            res[obj[key]] = obj;
-        });
+    var instream = fs.createReadStream('db/' + old_file);
+    var outstream = new stream;
+    var lr = readline.createInterface(instream, outstream);
 
-        // create new file containing correctly structured data
-        fs.writeFile("db/" + new_file, JSON.stringify(res, null, 4), function(err) {
+    lr.on('error', function (err) {
+      console.log(err);
+    });
+
+    var res = {};
+    lr.on('line', function (line) {
+      var json = JSON.parse(line);
+      res[json[key]] = json;
+    });
+
+    lr.on('close', function () {
+        fs.writeFile('db/' + new_file, JSON.stringify(res, null, 4), function(err) {
             if(err) {
                 console.log(err);
             } else {
@@ -56,10 +67,12 @@ function parse(key, old_file, new_file){
 
 module.exports = function(app){
 
-    parse("user_id", "yelp_academic_dataset_user.json", "user.json");
-    parse("user_id", "yelp_academic_dataset_tip.json", "tip.json");
-    parse("business_id", "yelp_academic_dataset_business.json", "business.json");
-    parse("business_id", "yelp_academic_dataset_checkin.json", "checkin.json");
-    //parse("user_id", "yelp_academic_dataset_review_1.json", "review1.json");
-    //parse("user_id", "yelp_academic_dataset_review_2.json", "review2.json");
+    // parse("user_id", "yelp_academic_dataset_user.json", "user.json");
+    // parse("user_id", "yelp_academic_dataset_tip.json", "tip.json");
+    // parse("business_id", "yelp_academic_dataset_business.json", "business.json");
+    // parse("business_id", "yelp_academic_dataset_checkin.json", "checkin.json");
+    parse("user_id", "yelp_academic_dataset_review_1.json", "review1.json");
+    parse("user_id", "yelp_academic_dataset_review_2.json", "review2.json");
+
+
 }
