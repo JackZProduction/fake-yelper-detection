@@ -1,0 +1,29 @@
+{
+    "name": "yelpme",
+    "subdomain": "yelpme",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "version": "0.0.1-43",
+    "author": "zhang",
+    "dependencies": {
+        "express": "4.11.1",
+        "socket.io": "1.3.2",
+        "body-parser": "1.10.2",
+        "cookie-parser": "1.3.3",
+        "express-session": "1.10.1",
+        "ejs": "1.0.0",
+        "mongoose": "3.8.x",
+        "underscore": "1.7.0",
+        "connect": "3.3.4",
+        "async": "0.9.0",
+        "yelp": "latest"
+    },
+    "engines": {
+        "node": "0.10.x"
+    },
+    "ignore": [
+        ".gitignore",
+        ".npmignore"
+    ]
+}
