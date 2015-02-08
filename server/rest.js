@@ -95,7 +95,7 @@ function frequency(reviewText){
   'when', 'will', 'was', 'you', 'your', 'were', 'was', 'he', 'his', 'she', 'her', 'they', 'there', 'them', 'their', 'my', 'me', 'at', 'im', "i\'m",
   'its', 'ive', "it\'s", "i\'ve", "he\'s", "you\'re", "you\'ve", "you\'ll", "you\'d", "we", "we\'re", "we\'ve", "we\'ll", "we\'d", 'about', 'all', 'have', 'not',
   'over', 'all', 'get', 'or', "isn\'t", "they\'ll", 'are', 'no', 'out', 'now', 'because', 'let', 'are', 'why', 'but', 'only', 'so', 'such', 'being', 'many', 'every',
-  'other', 'what', 'also', 'by', 'etc', 'had', 'our', 'place', 'one', 'here', 'do', 'go', 'too', 'up'];
+  'other', 'what', 'also', 'by', 'etc', 'had', 'our', 'place', 'one', 'here', 'do', 'go', 'too', 'up', 'from', 'back', 'isnt', 'day', 'us', 'didnt', 'still'];
   ignore = (function(){
     var o = {}; // object prop checking > in array checking
     var iCount = ignore.length;
@@ -146,6 +146,10 @@ module.exports = function(app){
     // parse("user_id", "yelp_academic_dataset_review_1.json", "review1.json");
     // parse("user_id", "yelp_academic_dataset_review_2.json", "review2.json");
 
+    // business json
+    var business = JSON.parse(fs.readFileSync("db/business.json", "utf8"));
+
+
     fs.readFile("db/review1.json", "utf8", function(err, data){
       if (err) {
         console.log(err);
@@ -153,14 +157,21 @@ module.exports = function(app){
       }
       var json = JSON.parse(data);
 
+      app.get('/biz', function(req, res){
+        var randomBusinessId = pickRandomProperty(review);
+        res.json({
+          info: business[randomBusinessId],
+          word: review[randomBusinessId]
+        });
+      });
 
 
       var count = 0;
       _.each(createReview(json), function(reviewString, business_id){
         // console.log("finished:", count + "/" + _.size(json));
-        if (count > 10) return;
+        if (count > 100) return;
         var freq = frequency(reviewString);
-        review[business_id] = freq;
+        if (freq.length > 10) review[business_id] = freq;
         console.log(freq)
         count ++ ;
       });
@@ -171,9 +182,7 @@ module.exports = function(app){
 
     });
 
-    app.get('/biz', function(req, res){
-      res.json(review[pickRandomProperty(review)]);
-    });
+
 
 
 

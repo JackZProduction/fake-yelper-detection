@@ -1,9 +1,53 @@
 $( document ).ready(function () {
 
+$('#project_start').click(function(){
+  $("#first_screen").fadeOut(1000);
+});
 
 
-$('#get_biz').click(function(){
-  $.get('/biz', function(list){
+
+
+
+// get viewport size
+  getViewportSize = function() {
+      return {
+          height: window.innerHeight,
+          width:  window.innerWidth
+      };
+  };
+
+  // update canvas size
+  var updateSizes = function() {
+      var viewportSize = getViewportSize();
+      $('canvas').width(viewportSize.width).height(viewportSize.height - 150);
+      $('canvas').attr('width', viewportSize.width).attr('height', viewportSize.height - 150);
+  };
+
+  // run on load
+  updateSizes();
+
+
+$('#word').click(function(){
+  $.get('/biz', function(data){
+    var info = data.info;
+    var list = data.word;
+
+    var wifi = false;
+    var parking = false;
+    _.each(list, function(arr){
+      if (arr[0]=='wifi' || arr[0]=='wi-fi' || arr[0]=='internet') wifi = true;
+      if (arr[0]=='parking' || arr[0]=='park') parking = true;
+    });
+
+    var seperator = "&nbsp;&nbsp; - &nbsp;&nbsp";
+    $('#business_name').html(
+      '<b>Name:</b> ' + info.name + seperator +
+      '<b>Stars:</b> ' + info.stars + seperator +
+      '<b>City:</b> ' + info.city + seperator +
+      '<b2>Free wifi:</b2> ' + wifi+ seperator +
+      '<b3>Parking:</b3> ' + parking
+    );
+
     if (_.isEmpty(list)) return;
 
     console.log('rendering..');

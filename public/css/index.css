@@ -1,6 +1,23 @@
+/*rgb(195,18,0);*/
+
 body{
     font-family: "Roboto", "Helvetica Neue";
     background: rgb(245,245,241);
+}
+
+b{
+    font-weight: 500;
+    color: rgb(195,18,0);
+}
+
+b2{
+    font-weight: 500;
+    color: #00afef;
+}
+
+b3{
+    font-weight: 500;
+    color: #00ba15;
 }
 
 *:focus {
@@ -22,8 +39,56 @@ body{
     position: absolute;
 }
 
-#frequency{
-    top: 60px;
+#first_screen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    background: #b70000;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+#project_name{
+    color: white;
+    font-size: 50px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    position: absolute;
+    top: 220px;
+    left: 0; right: 0;
+}
+
+#project_desc{
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    position: absolute;
+    top: 300px;
+    left: 0; right: 0;
+}
+
+#project_start{
+    border: 1px solid white;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    letter-spacing: 2px;
+    margin-top: 400px;
+    cursor: pointer;
+    display: inline-block;
+    width: 200px;
+}
+
+
+canvas {
+    display: block;
+    position: absolute;
 }
 
 #freq_text{
@@ -68,3 +133,69 @@ display: none;
 box-shadow: 0px 0px 5px 0px rgba(214,0,0,1);
 cursor: pointer;
 }
+
+#top{
+    width: 100%;
+    height: 70px;
+    background: white;
+    font-weight: 900px;
+    color: black;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#business_name{
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    font-weight: 900px;
+    color: black;
+    text-align: center;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    border-bottom: 5px solid white;
+}
+
+#topbar_logo{
+    margin-right: 2px;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+#topbar_title{
+    width: 230px;
+    height: 70px;
+    line-height: 70px;
+    background: white;
+    font-size: 30px;
+    float: left;
+    padding-right: 20px;
+    font-weight: 900;
+}
+
+
+.top_button{
+    width: 300px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 14px;
+    background: white;
+    letter-spacing: 1px;
+    font-weight: 700 !important;
+    float: left;
+    margin-left: 330px;
+}
+
+.top_button:hover{
+    background: rgb(195,18,0);
+    cursor: pointer;
+    color: white;
+}
+
+
+
+
