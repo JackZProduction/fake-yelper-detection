@@ -44,5 +44,11 @@ app.disable('x-powered-by'); // remove x-powered-by: express header
 // routes
 require('./server/rest.js')(app);
 
+app.get('/', function(req, res){
+    res.render('index');
+});
+
+
+
 
 console.log("Server started on localhost:" + port);
